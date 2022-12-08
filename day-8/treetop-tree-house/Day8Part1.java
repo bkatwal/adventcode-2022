@@ -2,12 +2,6 @@ import java.util.*;
 
 public class Day8Part1 {
 
-    /**
-     * 21
-     * 1533
-     *
-     * @param args
-     */
     public static void main(String[] args) {
         System.out.println(calculate(InputDay8.SMALL_INPUT));
         System.out.println(calculate(InputDay8.LARGE_INPUT));
