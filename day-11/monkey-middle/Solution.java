@@ -1,11 +1,11 @@
 import java.math.BigInteger;
 import java.util.*;
 
-public class Day11Part2 {
+public class Solution {
 
-    private static List<MonkeyPar2> monkeys = new ArrayList<>();
+    private static List<Monkey> monkeys = new ArrayList<>();
 
-    private static PriorityQueue<MonkeyPar2> pq =
+    private static PriorityQueue<Monkey> pq =
             new PriorityQueue<>((a, b) -> Long.compare(b.totalInspected, a.totalInspected));
 
     public static void main(String[] args) {
@@ -29,7 +29,7 @@ public class Day11Part2 {
         initMonkeys(input);
         BigInteger factor = factor();
         for (int i = 0; i < rounds; i++) {
-            for (MonkeyPar2 monkey : monkeys) {
+            for (Monkey monkey : monkeys) {
                 for (BigInteger worryLevel : monkey.worryLevels) {
 
                     if (part.equals("1")) {
@@ -44,7 +44,7 @@ public class Day11Part2 {
             }
         }
 
-        for (MonkeyPar2 mo : monkeys) {
+        for (Monkey mo : monkeys) {
             pq.offer(mo);
         }
 
@@ -59,8 +59,8 @@ public class Day11Part2 {
 
     private static BigInteger factor() {
         BigInteger factor = BigInteger.ONE;
-        for (MonkeyPar2 monkeyPar2 : monkeys) {
-            factor = factor.multiply(monkeyPar2.divisibleBy);
+        for (Monkey monkey : monkeys) {
+            factor = factor.multiply(monkey.divisibleBy);
         }
         return factor;
     }
@@ -84,7 +84,7 @@ public class Day11Part2 {
         return BigInteger.ZERO;
     }
 
-    private static void partOne(MonkeyPar2 monkey, BigInteger worryLevel) {
+    private static void partOne(Monkey monkey, BigInteger worryLevel) {
         BigInteger operand = monkey.useOldOperand ? worryLevel : monkey.operand;
         BigInteger newVal = performOperation(operand, monkey.operation, worryLevel);
         newVal = newVal.divide(BigInteger.valueOf(3));
@@ -95,7 +95,7 @@ public class Day11Part2 {
         }
     }
 
-    private static void partTwo(MonkeyPar2 monkey, BigInteger worryLevel, BigInteger factor) {
+    private static void partTwo(Monkey monkey, BigInteger worryLevel, BigInteger factor) {
         BigInteger operand = monkey.useOldOperand ? worryLevel : monkey.operand;
         BigInteger newVal = performOperation(operand, monkey.operation, worryLevel);
         if (newVal.mod(monkey.divisibleBy).equals(BigInteger.ZERO)) {
@@ -114,7 +114,7 @@ public class Day11Part2 {
             if (row.startsWith("Monkey")) {
                 j = i + 1;
                 row = allRows[j].trim();
-                MonkeyPar2 monkey = new MonkeyPar2();
+                Monkey monkey = new Monkey();
                 monkey.monkeyId = 0;
                 String itemsStr = row.trim().replace("Starting items: ", "");
                 String[] items = itemsStr.trim().split(", ");
@@ -155,7 +155,7 @@ public class Day11Part2 {
 }
 
 
-class MonkeyPar2 {
+class Monkey {
     int monkeyId;
     long totalInspected;
 
