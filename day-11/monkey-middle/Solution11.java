@@ -1,7 +1,9 @@
 import java.math.BigInteger;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.PriorityQueue;
 
-public class Solution {
+public class Solution11 {
 
     private static List<Monkey> monkeys = new ArrayList<>();
 
